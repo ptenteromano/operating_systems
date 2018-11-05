@@ -1,0 +1,41 @@
+Phil Tenteromano
+9/24/2018
+Linux Command Line 
+
+Basic commands
+man command display manual pages for the given command. Note: you type q to exit from the manual.
+ls	list files and directories
+mkdir	make a directory
+cd directory	change to named directory
+cd change to home-directory
+cd ~ change to home-directory
+cd .. change to parent directory
+pwd	display the path of the current directory
+cp file1 file2	copy file1 and call it file2
+mv file1 file2	move or rename file1 to file2
+rm file	remove a file
+rmdir directory	remove a directory
+cat file	display a file
+more file	display a file a page at a time
+head file	display the first few lines of a file
+tail file	display the last few lines of a file
+grep 'keyword' file	search a file for keywords
+wc file	count number of lines/words/characters in file
+
+
+Process control and system commands 
+ps process status
+top display processes as they use resources
+kill send a signal to a process
+uname system info
+vmstat memory info
+netstat network status, port use
+skill signal interface
+snice priority interface
+prtstat print process status
+ipcs interprocess communication
+pstree process relationship tree
+
+
+
+
