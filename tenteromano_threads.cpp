@@ -7,6 +7,9 @@
 *
 * Using two threads, semaphores, mutex
 * Syncronize threads to share a circular buffer
+*
+* Need to link with pthread on compilation:
+* g++ lab3.cpp -lpthread
 */
 
 #include <iostream>
@@ -40,8 +43,11 @@ class SharedBuffer {
     public:
 		// constructor takes in cmd line arguments and inits globals
         SharedBuffer(int size, string fileName) {
-            this->size = size;
-            buffer = new string[size];
+            if (size > 0)
+				this->size = size;
+			else
+				this->size = 5;
+            buffer = new string[this->size];
             write = 0;
 			read = 0;
             file = fileName;
@@ -51,7 +57,7 @@ class SharedBuffer {
 			// init the semaphores - binary mutex, 
 			sem_init(&mtx_lock, 0 , 1);
             sem_init(&item, 0, 0);
-            sem_init(&blank, 0, size);
+            sem_init(&blank, 0, this->size);
         }
 
 		// producer thread
@@ -81,7 +87,8 @@ class SharedBuffer {
             }
 			// error check and exit completely
 			else {
-				cout << "Could not open file" << endl;
+				cout << "Could not open file: " << '"' << file << '"' << endl;
+				delete []buffer;
 				exit(1);
 			}
 
@@ -114,6 +121,7 @@ class SharedBuffer {
 				// also check if indices are equal and tallies are equal
                 if (eof && (read == write) && (linesRead == linesWritten)) {
 					cout<<"Total lines read: " << linesRead << endl;
+					delete []buffer;
 					break;
 				}
             };
@@ -170,4 +178,6 @@ int main(int argc, char *argv[]) {
 	
     return 0;
 }
+
+
 
